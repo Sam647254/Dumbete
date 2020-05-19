@@ -1,19 +1,15 @@
 component Main {
-  style base {
-    font-family: sans;
-    font-weight: bold;
-    font-size: 50px;
+   state time : Time = Time.now()
 
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-  }
+   use Provider.Tick {
+      ticks = () {
+         next { time = Time.now() }
+      }
+   }
 
-  fun render : Html {
-    <div::base>
-      <{ "Hello Mint!" }>
-    </div>
-  }
+   fun render : Html {
+      <div>
+        <{ time |> Time.toIso }>
+      </div>
+   }
 }
